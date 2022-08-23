@@ -1,0 +1,16 @@
+.filter-list {
+  background-color: var(--card-bg);
+  color: var(--inactive-color);
+  font-size: 1.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+  grid-area: nav;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: pointer;
+
+  > *:hover {
+    color: var(--hover-color);
+  }
+}

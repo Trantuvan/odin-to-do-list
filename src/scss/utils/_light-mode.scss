@@ -1,0 +1,13 @@
+.light-mode {
+  --bg-color: hsl(236, 33%, 92%);
+  --card-bg: hsl(0, 0%, 98%);
+  --text-color: hsl(0, 0%, 26%);
+  --inactive-color: hsl(236, 9%, 61%);
+  --active-color: hsl(220, 98%, 61%);
+  --hover-color: hsl(235, 19%, 35%);
+  --check-color: hsl(233, 11%, 84%);
+  --shadow-color: hsla(240, 5%, 85%, 0.603);
+  --plus-color: black;
+  --bg-img-mobile: url(../img/bg-mobile-light.jpg);
+  --bg-img-desktop: url(../img/bg-desktop-light.jpg);
+}

@@ -1,0 +1,15 @@
+:root {
+  font-size: 62.5%;
+
+  --bg-color: hsl(235, 21%, 11%);
+  --card-bg: hsl(235, 24%, 19%);
+  --text-color: hsl(0, 0%, 73%);
+  --inactive-color: hsl(234, 11%, 52%);
+  --active-color: hsl(220, 98%, 61%);
+  --hover-color: hsl(236, 33%, 92%);
+  --check-color: hsl(233, 14%, 35%);
+  --shadow-color: hsla(0, 0%, 7%, 0.877);
+  --plus-color: white;
+  --bg-img-mobile: url(../img/bg-mobile-dark.jpg);
+  --bg-img-desktop: url(../img/bg-desktop-dark.jpg);
+}

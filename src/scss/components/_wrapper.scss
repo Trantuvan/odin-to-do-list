@@ -1,0 +1,15 @@
+.wrapper {
+  width: 80%;
+  min-height: 90%;
+  position: fixed;
+  top: 6rem;
+
+  display: grid;
+  gap: 2em;
+  grid-template-rows: 1fr 1fr 10fr 1fr;
+  grid-template-areas:
+    "header"
+    "form-create"
+    "todo-container"
+    "nav";
+}

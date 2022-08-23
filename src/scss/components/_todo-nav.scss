@@ -1,0 +1,30 @@
+.todo-container__nav {
+  border-right: 2px solid var(--check-color);
+}
+
+.nav__header {
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.nav__list {
+  height: calc(100vh - 40rem);
+  overflow: auto;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+
+  color: var(--inactive-color);
+
+  & > * {
+    background-color: var(--bg-color);
+    width: 90%;
+    border-radius: 4px;
+    padding: 0.5em 1em;
+  }
+
+  & > *:hover {
+    color: var(--hover-color);
+  }
+}
