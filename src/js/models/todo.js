@@ -1,10 +1,10 @@
 import { format } from "date-fns";
 
 export default class ToDo {
-  constructor(options = {}) {
-    this.title = options.title || "";
-    this.notes = options.notes || "";
-    this.isCompleted = options.isCompleted || false;
-    this.dueDate = options.dueDate || format(new Date(), "yyyy-MM-dd");
+  constructor(state = {}) {
+    this.title = state.title || "";
+    this.notes = state.notes || "";
+    this.isCompleted = state.isCompleted || false;
+    this.dueDate = state.dueDate || format(new Date(), "yyyy-MM-dd");
   }
 }

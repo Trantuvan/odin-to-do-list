@@ -1,6 +1,6 @@
 export default class Project {
-  constructor(options = {}) {
-    this.name = options.name || "";
+  constructor(state = {}) {
+    this.name = state.name || "";
     this.todos = [];
   }
 }
