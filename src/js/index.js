@@ -31,4 +31,26 @@ import ProjectController from "./controllers/projectController";
 function main() {
   const projectState = new State();
   const projectController = new ProjectController();
+
+  // window event create project when unfocused input
+  const projectNameInput = document.getElementById("project-name");
+  projectNameInput.addEventListener("blur", createProject);
+
+  // window event create project when enter is pressed
+  projectNameInput.addEventListener("keyup", (evt) => {
+    const keyName = evt.key;
+
+    if (keyName === "Enter") {
+      createProject();
+    }
+  });
+
+  function createProject() {
+    if (projectNameInput.value === "") {
+      return;
+    }
+
+    projectState.setState("name", projectNameInput.value);
+    projectController.create(projectState.getState());
+  }
 }
