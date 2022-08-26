@@ -11,7 +11,7 @@ export default function toggleLightMode() {
     iconToggle.src = moonIcon;
     iconToggle.alt = "dark mode";
 
-    localStorage.setItem("lightMode", "enabled");
+    localStorage.setItem("lightMode", JSON.stringify(true));
   };
 
   const disableLightMode = () => {
@@ -19,17 +19,17 @@ export default function toggleLightMode() {
     iconToggle.src = sunIcon;
     iconToggle.alt = "light mode";
 
-    localStorage.setItem("lightMode", null);
+    localStorage.setItem("lightMode", JSON.stringify(false));
   };
 
-  if (lightMode === "enabled") {
+  if (JSON.parse(lightMode) === true) {
     enableLightMode();
   }
 
   lightModeToggle.addEventListener("click", () => {
     lightMode = localStorage.getItem("lightMode");
 
-    if (lightMode !== "enabled") {
+    if (JSON.parse(lightMode) === false) {
       enableLightMode();
     } else {
       disableLightMode();
