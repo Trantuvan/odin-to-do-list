@@ -52,5 +52,7 @@ function main() {
 
     projectState.setState("name", projectNameInput.value);
     projectController.create(projectState.getState());
+    // clear input field
+    projectNameInput.value = "";
   }
 }
