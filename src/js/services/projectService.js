@@ -1,12 +1,8 @@
 import Project from "../models/project.js";
 
 export default class ProjectService {
-  constructor(state) {
-    this.state = state;
-  }
-
-  createProject() {
-    const project = new Project(this.state);
+  createProject(projectState) {
+    const project = new Project(projectState);
     return project;
   }
 }
