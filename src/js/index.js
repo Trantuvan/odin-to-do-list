@@ -40,7 +40,7 @@ function main() {
       return;
     }
 
-    const newProject = project().setName(projectNameInput.value);
+    const newProject = project(projectNameInput.value);
     events.emit(TOPICS.PROJECT_CREATED, newProject);
   }
 }

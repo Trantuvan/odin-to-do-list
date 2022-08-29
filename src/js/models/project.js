@@ -1,5 +1,4 @@
-export default function project() {
-  let name = "";
+export default function project(name) {
   const todos = [];
 
   const setName = (value) => (name = value);
