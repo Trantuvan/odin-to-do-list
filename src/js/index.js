@@ -24,13 +24,17 @@ import projectListController from "./controllers/projectListController";
 function main() {
   // window event create project when unfocused input
   const projectNameInput = document.getElementById("project-name");
-  projectNameInput.addEventListener("blur", createProject);
+  projectNameInput.addEventListener("blur", (evt) => {
+    evt.preventDefault();
+    createProject();
+  });
 
   // window event create project when enter is pressed
-  projectNameInput.addEventListener("keyup", (evt) => {
-    const keyName = evt.key;
+  projectNameInput.addEventListener("keypress", (evt) => {
+    const key = evt.key;
 
-    if (keyName === "Enter") {
+    if (key === "Enter") {
+      evt.preventDefault();
       createProject();
     }
   });
