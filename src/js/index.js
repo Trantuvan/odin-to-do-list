@@ -2,36 +2,26 @@ import "../scss/style.scss";
 import Logo from "../img/favicon-32x32.png";
 
 import changeFavicon from "./utils/changeFavicon";
-import storageAvailable from "./localStorage/storageAvailable";
 import toggleLightMode from "./localStorage/lightMode";
-import initProjectArray from "./localStorage/initProjectArray";
-import State from "./utils/state";
-import ProjectController from "./controllers/projectController";
+import { TOPICS } from "./enum/topics";
+import { events } from "./utils/event";
+import project from "./models/project";
+import projectListController from "./controllers/projectListController";
 
 (() => {
   // changeFavicon
   changeFavicon(Logo);
+  // set lightMode
+  toggleLightMode();
 
-  // test localStorage availability
-  const localStorageAvailable = storageAvailable("localStorage");
+  // listen to project create events
+  events.on(TOPICS.PROJECT_CREATED, projectListController.add);
 
-  if (localStorageAvailable === true) {
-    // set lightMode
-    toggleLightMode();
-    // init projectArray
-    initProjectArray();
-    // start app
-    main();
-  } else {
-    // log error in console && false silently with UI user
-    console.log(localStorageAvailable);
-  }
+  // app startup
+  main();
 })();
 
 function main() {
-  const projectState = new State();
-  const projectController = new ProjectController();
-
   // window event create project when unfocused input
   const projectNameInput = document.getElementById("project-name");
   projectNameInput.addEventListener("blur", createProject);
@@ -50,7 +40,7 @@ function main() {
       return;
     }
 
-    projectState.setState("name", projectNameInput.value);
-    projectController.create(projectState.getState());
+    const newProject = project().setName(projectNameInput.value);
+    events.emit(TOPICS.PROJECT_CREATED, newProject);
   }
 }
