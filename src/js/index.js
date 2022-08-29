@@ -46,5 +46,8 @@ function main() {
 
     const newProject = project(projectNameInput.value);
     events.emit(TOPICS.PROJECT_CREATED, newProject);
+
+    // clear input value
+    projectNameInput.value = "";
   }
 }

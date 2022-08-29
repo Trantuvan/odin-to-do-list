@@ -5,12 +5,12 @@ export default (function projectListView() {
 
   const render = () => {
     const navList = document.querySelector(".nav__list");
+    const navItem = document.createElement("li");
+    navItem.setAttribute("class", "nav__item");
 
-    const navItems = projects.forEach((project) => {
-      const navItem = document.createElement("li");
-      navItem.className = "nav__item";
-      navItem.innerHTML = `${project.name}`;
-    });
+    navItem.innerHTML = `${projects.at(-1).name}`;
+
+    navList.appendChild(navItem);
   };
 
   return { addProject, render };
