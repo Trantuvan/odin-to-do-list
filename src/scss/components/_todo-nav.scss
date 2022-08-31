@@ -18,15 +18,18 @@
   color: var(--inactive-color);
 
   & > * {
+    position: relative;
     background-color: var(--bg-color);
-    padding: 0.5em 0.8em 0.5em 1em;
-    width: 90%;
+    padding: 0.5em 0.8em;
+    width: 95%;
     border-radius: 4px;
-    display: grid;
-    gap: 0.2em;
-    grid-template-columns: 5fr 1fr;
-    grid-template-areas: "project-name actions";
-    align-items: center;
+    display: flex;
+    gap: 0.5em;
+
+    > i {
+      cursor: pointer;
+      padding: 0.2em 0.5em;
+    }
   }
 
   & > *:hover {
@@ -38,11 +41,24 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  background-color: var(--bg-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 1.8rem;
 }
 
 .item__actions {
+  z-index: 1;
+  padding: 0.5em;
+  border-radius: 4px;
+  background-color: var(--bg-color);
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  display: none;
+  gap: 0.5em;
+}
+
+.display-flex {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.2em;
 }

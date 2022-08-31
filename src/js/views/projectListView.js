@@ -9,14 +9,52 @@ export default (function projectListView() {
     navItem.setAttribute("class", "nav__item");
 
     navItem.innerHTML = `
-      <div class="item__content">${projects.at(-1).name}</div>
+      <input
+        class="item__content"
+        type="text"
+        name="projectName"
+        placeholder="${projects.at(-1).name}"
+        disabled
+        />
+        <i class="fa-solid fa-ellipsis-vertical"></i>
       <div class="item__actions">
-        <i class="fa-regular fa-pen-to-square fa-xs edit-action"></i>
-        <i class="fa-regular fa-trash-can fa-xs delete-action"></i>
+        <button type="button" class="btn btn-edit">edit</button>
+        <button type="button" class="btn btn-delete">delete</button>
       </div>
     `;
 
     navList.appendChild(navItem);
+
+    const ellipsis = navItem.querySelector("i");
+
+    ellipsis.addEventListener("click", (evt) => {
+      evt.stopPropagation();
+      const itemActions = navItem.querySelector(".item__actions");
+      itemActions.classList.toggle("display-flex");
+    });
+
+    window.addEventListener("click", () => {
+      const itemActions = navItem.querySelector(".item__actions");
+      itemActions.classList.remove("display-flex");
+    });
+
+    const actionButtons = navItem.querySelector(".item__actions").children;
+
+    Array.from(actionButtons).forEach((element) => {
+      const classList = element.classList;
+
+      if (classList.contains("btn-edit")) {
+        element.addEventListener("click", (evt) => {
+          const projectName = document.querySelector(".item__content");
+          projectName.disabled = false;
+          projectName.focus();
+        });
+      }
+
+      if (classList.contains("btn-delete")) {
+        console.log(element);
+      }
+    });
   };
 
   return { addProject, render };
