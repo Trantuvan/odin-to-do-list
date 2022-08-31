@@ -45,7 +45,8 @@ export default (function projectListView() {
 
       if (classList.contains("btn-edit")) {
         element.addEventListener("click", (evt) => {
-          const projectName = document.querySelector(".item__content");
+          const projectName =
+            evt.target.parentNode.parentNode.querySelector(".item__content");
           projectName.disabled = false;
           projectName.focus();
         });
