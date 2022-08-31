@@ -1,0 +1,16 @@
+.btn {
+  border-radius: 4px;
+  font-size: 1.2rem;
+  padding: 0.4em 1em;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background-color: hsl(120, 100%, 25%);
+  color: hsl(0, 0%, 100%);
+}
+
+.btn-delete {
+  background-color: hsla(7, 100%, 50%, 0.932);
+  color: hsl(0, 0%, 100%);
+}

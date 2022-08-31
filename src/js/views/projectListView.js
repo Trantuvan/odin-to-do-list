@@ -8,7 +8,13 @@ export default (function projectListView() {
     const navItem = document.createElement("li");
     navItem.setAttribute("class", "nav__item");
 
-    navItem.innerHTML = `${projects.at(-1).name}`;
+    navItem.innerHTML = `
+    <div class="item__content">${projects.at(-1).name}</div>
+    <div class="item__actions">
+      <button type="button" class="btn btn-edit">edit</button>
+      <button type="button" class="btn btn-delete">delete</button>
+    </div>
+    `;
 
     navList.appendChild(navItem);
   };

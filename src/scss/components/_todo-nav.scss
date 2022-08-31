@@ -19,12 +19,29 @@
 
   & > * {
     background-color: var(--bg-color);
+    padding: 0.5em;
     width: 90%;
     border-radius: 4px;
-    padding: 0.5em 1em;
+    display: grid;
+    gap: 0.4em;
+    grid-template-rows: repeat(2, 1fr);
   }
 
   & > *:hover {
     color: var(--hover-color);
   }
+}
+
+.item__content {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2em;
 }
