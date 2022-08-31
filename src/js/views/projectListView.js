@@ -9,11 +9,11 @@ export default (function projectListView() {
     navItem.setAttribute("class", "nav__item");
 
     navItem.innerHTML = `
-    <div class="item__content">${projects.at(-1).name}</div>
-    <div class="item__actions">
-      <button type="button" class="btn btn-edit">edit</button>
-      <button type="button" class="btn btn-delete">delete</button>
-    </div>
+      <div class="item__content">${projects.at(-1).name}</div>
+      <div class="item__actions">
+        <i class="fa-regular fa-pen-to-square fa-xs edit-action"></i>
+        <i class="fa-regular fa-trash-can fa-xs delete-action"></i>
+      </div>
     `;
 
     navList.appendChild(navItem);
