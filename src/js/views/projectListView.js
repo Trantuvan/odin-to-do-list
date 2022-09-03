@@ -1,9 +1,5 @@
 export default (function projectListView() {
-  const projects = [];
-
-  const addProject = (newProject) => projects.push(newProject);
-
-  const renderAddProject = () => {
+  const renderAddProject = (newProject) => {
     const navList = document.querySelector(".nav__list");
     const navItem = document.createElement("li");
     navItem.setAttribute("class", "nav__item");
@@ -13,7 +9,8 @@ export default (function projectListView() {
         class="item__content"
         type="text"
         name="projectName"
-        placeholder="${projects.at(-1).name}"
+        placeholder="${newProject.name}"
+        data-id = "${newProject.id}"
         disabled
         />
         <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -59,10 +56,10 @@ export default (function projectListView() {
       }
 
       if (classList.contains("btn-delete")) {
-        console.log(element);
+        // console.log(element);
       }
     });
   };
 
-  return { addProject, renderAddProject };
+  return { renderAddProject };
 })();

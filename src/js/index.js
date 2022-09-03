@@ -3,8 +3,7 @@ import Logo from "../img/favicon-32x32.png";
 
 import changeFavicon from "./utils/changeFavicon";
 import toggleLightMode from "./localStorage/lightMode";
-import { TOPICS } from "./enum/topics";
-import { events } from "./utils/event";
+import isEmptyOrSpaces from "./utils/isEmptyOrSpaces";
 import project from "./models/project";
 import projectListController from "./controllers/projectListController";
 
@@ -13,9 +12,6 @@ import projectListController from "./controllers/projectListController";
   changeFavicon(Logo);
   // set lightMode
   toggleLightMode();
-
-  // listen to project create events
-  events.on(TOPICS.PROJECT_CREATED, projectListController.add);
 
   // app startup
   main();
@@ -40,12 +36,12 @@ function main() {
   });
 
   function createProject() {
-    if (projectNameInput.value === "") {
+    if (isEmptyOrSpaces(projectNameInput.value) === true) {
       return;
     }
 
     const newProject = project(projectNameInput.value);
-    events.emit(TOPICS.PROJECT_CREATED, newProject);
+    projectListController.add(newProject);
 
     // clear input value
     projectNameInput.value = "";

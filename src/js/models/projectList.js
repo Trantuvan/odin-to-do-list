@@ -3,6 +3,7 @@ export default (function projectList() {
 
   const addProject = (project) => {
     projects.push(project);
+    console.log("projectList", projects);
   };
 
   return { addProject };
