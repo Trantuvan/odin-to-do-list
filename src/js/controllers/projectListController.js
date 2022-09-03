@@ -9,7 +9,7 @@ export default (function projectListController() {
   // add project to projectListView array
   events.on(TOPICS.PROJECT_ADDED, projectListView.addProject);
   // render last project in projectListView array
-  events.on(TOPICS.PROJECT_ADDED, projectListView.render);
+  events.on(TOPICS.PROJECT_ADDED, projectListView.renderAddProject);
 
   const add = (newProject) => {
     events.emit(TOPICS.PROJECT_ADDED, newProject);

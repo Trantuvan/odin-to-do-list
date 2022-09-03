@@ -3,7 +3,7 @@ export default (function projectListView() {
 
   const addProject = (newProject) => projects.push(newProject);
 
-  const render = () => {
+  const renderAddProject = () => {
     const navList = document.querySelector(".nav__list");
     const navItem = document.createElement("li");
     navItem.setAttribute("class", "nav__item");
@@ -64,5 +64,5 @@ export default (function projectListView() {
     });
   };
 
-  return { addProject, render };
+  return { addProject, renderAddProject };
 })();
