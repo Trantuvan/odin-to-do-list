@@ -25,6 +25,11 @@ export default (function projectListView() {
 
     navList.appendChild(navItem);
 
+    listViewDomEvents(navItem);
+  };
+
+  const listViewDomEvents = (navItem) => {
+    // toggle action Menu
     const ellipsis = navItem.querySelector("i");
 
     ellipsis.addEventListener("click", (evt) => {
@@ -38,6 +43,7 @@ export default (function projectListView() {
       itemActions.classList.remove("display-flex");
     });
 
+    // add EventListener for edit / delete actions
     const actionButtons = navItem.querySelector(".item__actions").children;
 
     Array.from(actionButtons).forEach((element) => {
