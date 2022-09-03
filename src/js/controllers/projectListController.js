@@ -4,10 +4,16 @@ import projectListView from "../views/projectListView";
 export default (function projectListController() {
   const add = (newProject) => {
     projectList.addProject(newProject);
-    projectListView.renderAddProject(newProject);
+    projectListView.render(newProject);
   };
 
-  const get = (id) => {};
+  const update = (id, name) => {
+    projectList.updateProject(id, name);
+  };
 
-  return { add, get };
+  const remove = (id) => {
+    projectList.removeProject(id);
+  };
+
+  return { add, update, remove };
 })();

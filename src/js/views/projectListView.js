@@ -1,5 +1,8 @@
+import projectListController from "../controllers/projectListController";
+import isEmptyOrSpaces from "../utils/isEmptyOrSpaces";
+
 export default (function projectListView() {
-  const renderAddProject = (newProject) => {
+  const render = (project) => {
     const navList = document.querySelector(".nav__list");
     const navItem = document.createElement("li");
     navItem.setAttribute("class", "nav__item");
@@ -9,8 +12,8 @@ export default (function projectListView() {
         class="item__content"
         type="text"
         name="projectName"
-        placeholder="${newProject.name}"
-        data-id = "${newProject.id}"
+        placeholder="${project.name}"
+        data-id = "${project.id}"
         disabled
         />
         <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -50,16 +53,59 @@ export default (function projectListView() {
         element.addEventListener("click", (evt) => {
           const projectName =
             evt.target.parentNode.parentNode.querySelector(".item__content");
+
           projectName.disabled = false;
           projectName.focus();
+
+          // change project name
+          projectName.addEventListener("blur", (evt) => {
+            evt.preventDefault();
+            updateProject(evt);
+          });
+
+          // window event create project when enter is pressed
+          projectName.addEventListener("keypress", (evt) => {
+            const key = evt.key;
+
+            if (key === "Enter") {
+              evt.preventDefault();
+              updateProject(evt);
+            }
+          });
+
+          function updateProject(evt) {
+            const currentProject = evt.target;
+            if (isEmptyOrSpaces(evt.target.value) === true) {
+              return;
+            }
+
+            projectListController.update(
+              currentProject.getAttribute("data-id"),
+              currentProject.value
+            );
+            currentProject.disabled = true;
+          }
         });
       }
 
       if (classList.contains("btn-delete")) {
-        // console.log(element);
+        element.addEventListener("click", (evt) => {
+          const projectName =
+            evt.target.parentNode.parentNode.querySelector(".item__content");
+
+          // delete project in projectList
+          deleteProject(projectName.getAttribute("data-id"));
+
+          const navList = navItem.parentNode;
+          navList.removeChild(navItem);
+        });
+
+        function deleteProject(currentId) {
+          projectListController.remove(currentId);
+        }
       }
     });
   };
 
-  return { renderAddProject };
+  return { render };
 })();
