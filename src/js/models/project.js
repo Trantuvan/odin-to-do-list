@@ -6,5 +6,5 @@ export default function project(name) {
 
   const setName = (value) => (name = value);
 
-  return { id, name, todos, setName };
+  return { id, name, setName, todos };
 }
