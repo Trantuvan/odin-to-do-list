@@ -50,6 +50,21 @@ function main() {
   }
 
   // new ToDo
+  const modal = document.querySelector(".modal");
+  const modalContainer = document.querySelector(".modal-container");
   const addTaskbtn = document.querySelector("#add-task");
-  addTaskbtn.addEventListener("click", (evt) => {});
+
+  addTaskbtn.addEventListener("click", () => {
+    modal.classList.toggle("deactivated");
+  });
+
+  // click outside modal will close the modal
+  modal.addEventListener("click", () => {
+    modal.classList.toggle("deactivated");
+  });
+
+  // prevent modal close when click in form
+  modalContainer.addEventListener("click", (evt) => {
+    evt.stopPropagation();
+  });
 }
