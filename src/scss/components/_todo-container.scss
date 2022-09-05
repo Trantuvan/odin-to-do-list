@@ -21,6 +21,7 @@
 
   &__content {
     display: grid;
+    gap: 1em;
     grid-template-rows: 1fr 8fr;
     grid-template-areas:
       "header"

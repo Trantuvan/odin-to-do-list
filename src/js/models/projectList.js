@@ -3,11 +3,12 @@ export default (function projectList() {
 
   const addProject = (project) => {
     projects.push(project);
+    console.log("addProject", projects);
   };
 
-  // const getProject = (id) => {
-  //   return projects.find((project) => project.id === id);
-  // };
+  const getProject = (id) => {
+    return projects.find((project) => project.id === id);
+  };
 
   const updateProject = (id, name) => {
     const currentProject = projects.find((project) => project.id === id);
@@ -16,8 +17,8 @@ export default (function projectList() {
 
   const removeProject = (id) => {
     const currentIndex = projects.findIndex((project) => project.id === id);
-    const deleteProject = projects.splice(currentIndex, 1);
+    return projects.splice(currentIndex, 1);
   };
 
-  return { addProject, updateProject, removeProject };
+  return { addProject, updateProject, removeProject, getProject };
 })();

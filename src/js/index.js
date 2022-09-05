@@ -6,6 +6,8 @@ import toggleLightMode from "./localStorage/lightMode";
 import isEmptyOrSpaces from "./utils/isEmptyOrSpaces";
 import project from "./models/project";
 import projectListController from "./controllers/projectListController";
+import projectController from "./controllers/projectController";
+import todo from "./models/todo";
 
 (() => {
   // changeFavicon
@@ -46,4 +48,8 @@ function main() {
     // clear input value
     projectNameInput.value = "";
   }
+
+  // new ToDo
+  const addTaskbtn = document.querySelector("#add-task");
+  addTaskbtn.addEventListener("click", (evt) => {});
 }

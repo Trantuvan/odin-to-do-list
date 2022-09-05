@@ -1,5 +1,6 @@
 import projectListController from "../controllers/projectListController";
 import isEmptyOrSpaces from "../utils/isEmptyOrSpaces";
+import projectController from "../controllers/projectController";
 
 export default (function projectListView() {
   const render = (project) => {
@@ -29,6 +30,20 @@ export default (function projectListView() {
   };
 
   const listViewDomEvents = (navItem) => {
+    // get project when click
+    navItem.addEventListener("click", (evt) => {
+      evt.stopPropagation();
+      // get project
+      const currentProjectId = navItem
+        .querySelector(".item__content")
+        .getAttribute("data-id");
+      const currentProject = projectListController.get(currentProjectId);
+
+      // setHeader name for todo
+      const headerName = document.querySelector(".header__name");
+      headerName.textContent = currentProject.name;
+      projectController.setProject(currentProject);
+    });
     // toggle action Menu
     const ellipsis = navItem.querySelector("i");
 
@@ -51,6 +66,7 @@ export default (function projectListView() {
 
       if (classList.contains("btn-edit")) {
         element.addEventListener("click", (evt) => {
+          evt.stopPropagation();
           const projectName =
             evt.target.parentNode.parentNode.querySelector(".item__content");
 
@@ -90,6 +106,7 @@ export default (function projectListView() {
 
       if (classList.contains("btn-delete")) {
         element.addEventListener("click", (evt) => {
+          evt.stopPropagation();
           const projectName =
             evt.target.parentNode.parentNode.querySelector(".item__content");
 

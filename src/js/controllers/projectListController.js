@@ -15,5 +15,9 @@ export default (function projectListController() {
     projectList.removeProject(id);
   };
 
-  return { add, update, remove };
+  const get = (id) => {
+    return projectList.getProject(id);
+  };
+
+  return { add, update, remove, get };
 })();
