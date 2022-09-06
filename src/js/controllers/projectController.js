@@ -17,6 +17,7 @@ export default (function projectController() {
     project.todos.push(newTodo);
     console.log("projectController", newTodo);
     console.log("projectController", project);
+    todoListView.renderTodo(newTodo);
   };
 
   return { setProject, addTodo, getAllTodos };

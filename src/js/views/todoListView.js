@@ -1,11 +1,15 @@
 export default (function todoListView() {
+  const removeAllChildNodes = (parent) => {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
+  };
   const renderAlltodos = (todos) => {
     const contentList = document.querySelector(".content__list");
-    const noTask = document.createElement("div");
 
     if (todos.length > 0) {
       todos.forEach((todo) => {
-        noTask.classList.toggle("no-todo");
+        removeAllChildNodes(contentList);
 
         const contentItem = document.createElement("li");
         contentItem.setAttribute("class", "content__item");
@@ -15,6 +19,8 @@ export default (function todoListView() {
         contentList.appendChild(contentItem);
       });
     } else {
+      removeAllChildNodes(contentList);
+      const noTask = document.createElement("div");
       noTask.setAttribute("class", "no-todo");
 
       noTask.innerHTML = "no tasks yet";
@@ -22,5 +28,21 @@ export default (function todoListView() {
       contentList.appendChild(noTask);
     }
   };
-  return { renderAlltodos };
+
+  const renderTodo = (todo) => {
+    const contentList = document.querySelector(".content__list");
+    const contentItem = document.createElement("li");
+    contentItem.setAttribute("class", "content__item");
+
+    const noTask = contentList.querySelector(".no-todo");
+
+    if (noTask) {
+      removeAllChildNodes(contentList);
+    }
+
+    contentItem.innerHTML = `${todo.title}`;
+
+    contentList.appendChild(contentItem);
+  };
+  return { renderAlltodos, renderTodo };
 })();
