@@ -21,5 +21,9 @@ export default (function projectController() {
     }
   };
 
-  return { setProject, addTodo, getAllTodos };
+  const removeAllToDos = () => {
+    project.todos.splice(0, project.todos.length);
+  };
+
+  return { setProject, addTodo, getAllTodos, removeAllToDos };
 })();

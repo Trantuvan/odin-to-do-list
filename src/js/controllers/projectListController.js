@@ -1,6 +1,7 @@
 import projectList from "../models/projectList";
 import projectListView from "../views/projectListView";
 import todoListView from "../views/todoListView";
+import projectController from "./projectController";
 
 export default (function projectListController() {
   const add = (newProject) => {
@@ -13,8 +14,9 @@ export default (function projectListController() {
   };
 
   const remove = (id) => {
-    projectList.removeProject(id);
+    projectController.removeAllToDos();
     todoListView.removeAllChildNodes();
+    projectList.removeProject(id);
   };
 
   const get = (id) => {
