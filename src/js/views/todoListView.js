@@ -1,14 +1,26 @@
 export default (function todoListView() {
-  const removeAllChildNodes = (parent) => {
-    while (parent.firstChild) {
-      parent.removeChild(parent.firstChild);
+  const removeAllChildNodes = () => {
+    const contentList = document.querySelector(".content__list");
+    while (contentList.firstChild) {
+      contentList.removeChild(contentList.firstChild);
     }
   };
+
+  const renderWhenNoProject = () => {
+    removeAllChildNodes();
+    const contentList = document.querySelector(".content__list");
+    const noTask = document.createElement("div");
+    noTask.setAttribute("class", "no-todo");
+
+    noTask.innerHTML = "must click to choose project first";
+    contentList.appendChild(noTask);
+  };
+
   const renderAlltodos = (todos) => {
     const contentList = document.querySelector(".content__list");
 
     if (todos.length > 0) {
-      removeAllChildNodes(contentList);
+      removeAllChildNodes();
 
       todos.forEach((todo) => {
         const contentItem = document.createElement("li");
@@ -19,7 +31,7 @@ export default (function todoListView() {
         contentList.appendChild(contentItem);
       });
     } else {
-      removeAllChildNodes(contentList);
+      removeAllChildNodes();
       const noTask = document.createElement("div");
       noTask.setAttribute("class", "no-todo");
 
@@ -37,12 +49,17 @@ export default (function todoListView() {
     const noTask = contentList.querySelector(".no-todo");
 
     if (noTask) {
-      removeAllChildNodes(contentList);
+      removeAllChildNodes();
     }
 
     contentItem.innerHTML = `${todo.title}`;
 
     contentList.appendChild(contentItem);
   };
-  return { renderAlltodos, renderTodo };
+  return {
+    renderAlltodos,
+    renderTodo,
+    removeAllChildNodes,
+    renderWhenNoProject,
+  };
 })();

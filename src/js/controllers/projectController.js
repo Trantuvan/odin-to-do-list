@@ -13,8 +13,12 @@ export default (function projectController() {
   };
 
   const addTodo = (newTodo) => {
-    project.todos.push(newTodo);
-    todoListView.renderTodo(newTodo);
+    try {
+      project.todos.push(newTodo);
+      todoListView.renderTodo(newTodo);
+    } catch (e) {
+      todoListView.renderWhenNoProject();
+    }
   };
 
   return { setProject, addTodo, getAllTodos };
