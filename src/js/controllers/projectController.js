@@ -5,7 +5,6 @@ export default (function projectController() {
 
   const setProject = (value) => {
     project = value;
-    console.log(project);
   };
 
   const getAllTodos = () => {
@@ -15,8 +14,6 @@ export default (function projectController() {
 
   const addTodo = (newTodo) => {
     project.todos.push(newTodo);
-    console.log("projectController", newTodo);
-    console.log("projectController", project);
     todoListView.renderTodo(newTodo);
   };
 

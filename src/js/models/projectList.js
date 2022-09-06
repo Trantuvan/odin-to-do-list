@@ -1,9 +1,8 @@
 export default (function projectList() {
   const projects = [];
-
+  console.log("projectList", projects);
   const addProject = (project) => {
     projects.push(project);
-    console.log("addProject", projects);
   };
 
   const getProject = (id) => {

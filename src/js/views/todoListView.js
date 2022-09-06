@@ -8,9 +8,9 @@ export default (function todoListView() {
     const contentList = document.querySelector(".content__list");
 
     if (todos.length > 0) {
-      todos.forEach((todo) => {
-        removeAllChildNodes(contentList);
+      removeAllChildNodes(contentList);
 
+      todos.forEach((todo) => {
         const contentItem = document.createElement("li");
         contentItem.setAttribute("class", "content__item");
 

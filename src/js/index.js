@@ -77,8 +77,11 @@ function main() {
 
   // create new todo
   modalSubmitButton.addEventListener("click", (evt) => {
+    // prevent default prevent page to reload
     evt.preventDefault();
     evt.stopPropagation();
+
+    const todoForm = document.getElementById("todo");
     const formActionInputs = document.querySelectorAll(".form-action input");
 
     const inputArray = Array.from(formActionInputs).filter(
@@ -94,6 +97,8 @@ function main() {
 
     // add todo to project
     projectController.addTodo(newTodo);
+
+    todoForm.reset();
 
     // close modal
     modal.classList.toggle("deactivated");
