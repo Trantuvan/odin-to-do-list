@@ -53,6 +53,7 @@ function main() {
   const modal = document.querySelector(".modal");
   const modalContainer = document.querySelector(".modal-container");
   const addTaskbtn = document.querySelector("#add-task");
+  const modalClosebtn = document.querySelector(".modal-header img");
 
   addTaskbtn.addEventListener("click", () => {
     modal.classList.toggle("deactivated");
@@ -60,6 +61,11 @@ function main() {
 
   // click outside modal will close the modal
   modal.addEventListener("click", () => {
+    modal.classList.toggle("deactivated");
+  });
+
+  modalClosebtn.addEventListener("click", (evt) => {
+    evt.stopPropagation();
     modal.classList.toggle("deactivated");
   });
 

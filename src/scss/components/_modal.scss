@@ -16,10 +16,18 @@
   width: min(40rem, 100%);
   border-radius: 4px;
   animation: modalFadeIn ease 0.5s;
-  min-height: 60%;
+  height: min(42rem, 100%);
   padding: 2em 2em;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 10fr;
+  justify-items: end;
+}
+
+.modal-header {
+  img {
+    cursor: pointer;
+  }
 }
 
 .add-todo {
