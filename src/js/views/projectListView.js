@@ -43,6 +43,9 @@ export default (function projectListView() {
       const headerName = document.querySelector(".header__name");
       headerName.textContent = currentProject.name;
       projectController.setProject(currentProject);
+
+      // render all todos already have
+      projectController.getAllTodos();
     });
     // toggle action Menu
     const ellipsis = navItem.querySelector("i");
