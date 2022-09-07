@@ -1,3 +1,5 @@
+import projectController from "../controllers/projectController";
+
 export default (function todoListView() {
   const removeAllChildNodes = () => {
     const contentList = document.querySelector(".content__list");
@@ -45,6 +47,7 @@ export default (function todoListView() {
     const contentList = document.querySelector(".content__list");
     const contentItem = document.createElement("li");
     contentItem.setAttribute("class", "content__item");
+    contentItem.setAttribute("data-id", todo.id);
 
     const noTask = contentList.querySelector(".no-todo");
 
@@ -53,6 +56,9 @@ export default (function todoListView() {
     }
 
     contentItem.innerHTML = `
+    <div class="item-status">
+      <input type="checkbox" name="isCompleted" value="false" />
+    </div>
     <div class="item-title">${todo.title}</div>
     <div class="item-date">${todo.date}</div>
     <div class="item-actions">
@@ -65,7 +71,74 @@ export default (function todoListView() {
     `;
 
     contentList.appendChild(contentItem);
+
+    todoViewDomEvents(contentItem, todo);
   };
+
+  const todoViewDomEvents = (contentItem, todo) => {
+    // update completion status
+    const itemStatus = contentItem.querySelector(
+      ".item-status input[type=checkbox]"
+    );
+
+    itemStatus.addEventListener("click", (evt) => {
+      evt.stopPropagation();
+
+      if (itemStatus.checked === true) {
+        document.querySelector(".item-title").classList.add("completed");
+        document.querySelector(".item-date").classList.add("completed");
+        projectController.updateTodoCompleted(
+          contentItem.getAttribute("data-id"),
+          itemStatus.checked
+        );
+      } else {
+        document.querySelector(".item-title").classList.remove("completed");
+        document.querySelector(".item-date").classList.remove("completed");
+        projectController.updateTodoCompleted(
+          contentItem.getAttribute("data-id"),
+          itemStatus.checked
+        );
+      }
+    });
+    // show contentItem details
+    const detailBtn = contentItem.querySelector(".btn-detail");
+
+    detailBtn.addEventListener("click", (evt) => {
+      evt.stopPropagation();
+      renderDetail(todo);
+    });
+  };
+
+  const renderDetail = (todo) => {
+    const modal = document.querySelector(".modal");
+    modal.classList.toggle("deactivated");
+
+    const modalBody = document.querySelector(".modal-body");
+
+    // remove all children
+    while (modalBody.firstChild) {
+      modalBody.removeChild(modalBody.firstChild);
+    }
+
+    const todoDetail = document.createElement("div");
+    todoDetail.setAttribute("id", "details");
+
+    todoDetail.innerHTML = `
+      <div class="item-title">Title: ${todo.title}</div>
+      <div class="item-date">Date: ${todo.date}</div>
+      <div class="item-notes">Notes: ${todo.notes}</div>
+      <div class="item-importance">Priority: ${
+        todo.isImportant ? "important" : "not important"
+      }</div>
+      <div class="item-completion">Status: ${
+        todo.isCompleted ? "completed" : "not completed"
+      }</div>
+
+    `;
+
+    modalBody.appendChild(todoDetail);
+  };
+
   return {
     renderAlltodos,
     renderTodo,

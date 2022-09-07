@@ -21,9 +21,20 @@ export default (function projectController() {
     }
   };
 
+  const updateTodoCompleted = (id, bool) => {
+    const currentTodo = project.todos.find((todo) => todo.id === id);
+    currentTodo.setIsCompleted(bool);
+  };
+
   const removeAllToDos = () => {
     project.todos.splice(0, project.todos.length);
   };
 
-  return { setProject, addTodo, getAllTodos, removeAllToDos };
+  return {
+    setProject,
+    addTodo,
+    getAllTodos,
+    removeAllToDos,
+    updateTodoCompleted,
+  };
 })();

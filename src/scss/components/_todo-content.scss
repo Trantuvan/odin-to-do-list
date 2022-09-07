@@ -23,12 +23,16 @@
     border-radius: 4px;
     padding: 0.6em;
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 0.2fr 5fr 1fr;
     gap: 0.5em;
     grid-template-areas:
-      "title actions"
-      "date actions";
+      "status title actions"
+      "status date actions";
     align-items: center;
+
+    .item-status {
+      grid-area: status;
+    }
 
     .item-title {
       grid-area: title;
@@ -60,10 +64,15 @@
 }
 
 .no-todo {
+  display: block;
   color: var(--text-color);
   text-align: center;
   font-size: 1.8rem;
   font-weight: 700;
   text-transform: uppercase;
   background-color: var(--card-bg);
+}
+
+.completed {
+  text-decoration: line-through;
 }

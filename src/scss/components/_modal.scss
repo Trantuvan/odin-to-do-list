@@ -30,11 +30,28 @@
   }
 }
 
+.modal-body {
+  width: 100%;
+}
+
+#details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: min(40rem, 100%);
+  height: min(42rem, 100%);
+
+  > * {
+    font-size: 1.8rem;
+  }
+}
+
 #todo {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   width: min(40rem, 100%);
+  height: min(42rem, 100%);
   gap: 1.6rem;
 }
 

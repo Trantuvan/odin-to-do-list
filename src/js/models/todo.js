@@ -3,11 +3,36 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function toDo(options = {}) {
   const id = uuidv4();
-  const title = options.title || "";
-  const notes = options.notes || "";
-  const isCompleted = options.isCompleted || false;
-  const isImportant = options.isImportant || false;
-  const date = options.date || format(new Date(), "yyyy-MM-dd");
+  let title = options.title || "";
+  let notes = options.notes || "";
+  let isCompleted = false;
+  let isImportant = false;
+  let date = options.date || format(new Date(), "yyyy-MM-dd");
 
-  return { id, title, notes, isImportant, date, isCompleted, isImportant };
+  const setIsCompleted = (bool) => {
+    isCompleted = bool;
+  };
+
+  // *Return getter make factory function reload new property if value change
+  return {
+    get id() {
+      return id;
+    },
+    get title() {
+      return title;
+    },
+    get notes() {
+      return notes;
+    },
+    get isImportant() {
+      return isImportant;
+    },
+    get date() {
+      return date;
+    },
+    get isCompleted() {
+      return isCompleted;
+    },
+    setIsCompleted,
+  };
 }
