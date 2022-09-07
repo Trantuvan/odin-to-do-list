@@ -33,6 +33,7 @@ export default (function projectListView() {
     // get project when click
     navItem.addEventListener("click", (evt) => {
       evt.stopPropagation();
+
       // get project
       const currentProjectId = navItem
         .querySelector(".item__content")

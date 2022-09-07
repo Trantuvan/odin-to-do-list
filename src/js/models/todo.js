@@ -7,7 +7,7 @@ export default function toDo(options = {}) {
   const notes = options.notes || "";
   const isCompleted = options.isCompleted || false;
   const isImportant = options.isImportant || false;
-  const dueDate = options.dueDate || format(new Date(), "yyyy-MM-dd");
+  const date = options.date || format(new Date(), "yyyy-MM-dd");
 
-  return { id, title, notes, isImportant, dueDate, isCompleted, isImportant };
+  return { id, title, notes, isImportant, date, isCompleted, isImportant };
 }

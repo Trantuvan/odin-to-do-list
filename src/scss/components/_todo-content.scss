@@ -19,9 +19,39 @@
   & > * {
     margin: 0 auto;
     background-color: var(--bg-color);
-    width: 90%;
+    width: 95%;
     border-radius: 4px;
-    padding: 0.5em 1em;
+    padding: 0.6em;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    gap: 0.5em;
+    grid-template-areas:
+      "title actions"
+      "date actions";
+    align-items: center;
+
+    .item-title {
+      grid-area: title;
+      color: var(--text-color);
+    }
+
+    .item-date {
+      grid-area: date;
+      font-size: 1.4rem;
+    }
+
+    .item-actions {
+      cursor: pointer;
+      grid-area: actions;
+      display: flex;
+      gap: 0.8rem;
+      justify-content: space-around;
+      align-items: center;
+
+      .icon__star-selected {
+        display: none;
+      }
+    }
   }
 
   & > *:hover {

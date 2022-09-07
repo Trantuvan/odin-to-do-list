@@ -52,7 +52,17 @@ export default (function todoListView() {
       removeAllChildNodes();
     }
 
-    contentItem.innerHTML = `${todo.title}`;
+    contentItem.innerHTML = `
+    <div class="item-title">${todo.title}</div>
+    <div class="item-date">${todo.date}</div>
+    <div class="item-actions">
+      <button class="btn btn-detail">details</button>
+      <i class="fa-regular fa-star icon__star"></i>
+      <i class="fa-solid fa-star icon__star-selected"></i>
+      <i class="fa-regular fa-pen-to-square" id="icon-edit"></i>
+      <i class="fa-solid fa-trash" id="icon-delete"></i>
+    </div>
+    `;
 
     contentList.appendChild(contentItem);
   };

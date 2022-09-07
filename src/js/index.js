@@ -92,7 +92,7 @@ function main() {
     const newTodo = todo({
       title: inputArray[0].value,
       notes: inputArray[1].value,
-      dueDate: inputArray[2].value,
+      date: inputArray[2].value,
     });
 
     // add todo to project
