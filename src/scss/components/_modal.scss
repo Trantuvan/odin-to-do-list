@@ -34,7 +34,7 @@
   width: 100%;
 }
 
-#details {
+.details {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -46,7 +46,7 @@
   }
 }
 
-#todo {
+.todo {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

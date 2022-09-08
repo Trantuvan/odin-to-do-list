@@ -17,6 +17,18 @@ export default function toDo(options = {}) {
     isImportant = bool;
   };
 
+  const setTitle = (value) => {
+    title = value;
+  };
+
+  const setNotes = (value) => {
+    notes = value;
+  };
+
+  const setDate = (value) => {
+    date = value;
+  };
+
   // *Return getter make factory function reload new property if value change
   return {
     get id() {
@@ -39,5 +51,8 @@ export default function toDo(options = {}) {
     },
     setIsCompleted,
     setIsImportant,
+    setTitle,
+    setNotes,
+    setDate,
   };
 }

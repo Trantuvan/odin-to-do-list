@@ -56,7 +56,7 @@
           <img src="./img/icon-cross.svg" alt="close icon" />
         </div>
         <div class="modal-body">
-          <form id="todo">
+          <form class="todo">
             <div class="form-action">
               <label for="title">Title</label>
               <input type="text" name="title" id="title" />
@@ -73,8 +73,22 @@
               <button class="btn" id="add-todo-submit" type="submit">
                 Submit
               </button>
+              <button
+                class="btn deactivated"
+                id="edit-todo-submit"
+                type="submit"
+              >
+                Edit
+              </button>
             </div>
           </form>
+          <div class="details deactivated">
+            <div class="item-title"></div>
+            <div class="item-date"></div>
+            <div class="item-notes"></div>
+            <div class="item-importance"></div>
+            <div class="item-completion"></div>
+          </div>
         </div>
       </div>
     </div>

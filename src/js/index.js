@@ -58,6 +58,13 @@ function main() {
 
   addTaskbtn.addEventListener("click", () => {
     modal.classList.toggle("deactivated");
+
+    const modalBody = document.querySelector(".modal-body");
+    const todoForm = modalBody.querySelector(".todo");
+    const details = modalBody.querySelector(".details");
+
+    todoForm.classList.remove("deactivated");
+    details.classList.add("deactivated");
   });
 
   // click outside modal will close the modal
@@ -81,7 +88,7 @@ function main() {
     evt.preventDefault();
     evt.stopPropagation();
 
-    const todoForm = document.getElementById("todo");
+    const todoForm = document.querySelector(".todo");
     const formActionInputs = document.querySelectorAll(".form-action input");
 
     const inputArray = Array.from(formActionInputs).filter(

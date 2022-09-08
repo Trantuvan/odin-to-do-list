@@ -31,6 +31,16 @@ export default (function projectController() {
     currentTodo.setIsImportant(bool);
   };
 
+  const updateTodo = (id, ...args) => {
+    const currentTodo = project.todos.find((todo) => todo.id === id);
+
+    console.dir("before update", currentTodo);
+    currentTodo.setTitle(args[0]);
+    currentTodo.setNotes(args[1]);
+    currentTodo.setDate(args[3]);
+    console.dir("after update", currentTodo);
+  };
+
   const removeAllToDos = () => {
     project.todos.splice(0, project.todos.length);
   };
@@ -42,5 +52,6 @@ export default (function projectController() {
     removeAllToDos,
     updateTodoCompleted,
     updateTodoImportant,
+    updateTodo,
   };
 })();

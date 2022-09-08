@@ -76,6 +76,79 @@ export default (function todoListView() {
   };
 
   const todoViewDomEvents = (contentItem, todo) => {
+    // update todo
+    const updateIcon = contentItem.querySelector("#icon-edit");
+
+    // *open form and populate old content
+    updateIcon.addEventListener("click", (evt) => {
+      evt.stopPropagation();
+      evt.preventDefault();
+
+      const modal = document.querySelector(".modal");
+      // open modal
+      modal.classList.toggle("deactivated");
+
+      // open form
+      const modalBody = document.querySelector(".modal-body");
+      const todoForm = modalBody.querySelector(".todo");
+      const details = modalBody.querySelector(".details");
+
+      todoForm.classList.remove("deactivated");
+      details.classList.add("deactivated");
+
+      // submitBtn
+      const submitBtn = document.querySelector("#add-todo-submit");
+      submitBtn.classList.toggle("deactivated");
+
+      const editBtn = document.querySelector("#edit-todo-submit");
+      editBtn.classList.toggle("deactivated");
+
+      const formActionInputs = document.querySelectorAll(".form-action input");
+
+      const inputArray = Array.from(formActionInputs).filter(
+        (input) => input.type !== "submit"
+      );
+
+      // * populate old input fields
+      inputArray.forEach((input) => {
+        if (input.id === "title") {
+          input.value = todo.title;
+        }
+        if (input.id === "notes") {
+          input.value = todo.notes;
+        }
+        if (input.id === "date") {
+          input.value = todo.date;
+        }
+      });
+    });
+
+    // *update new fields
+    const editBtn = document.querySelector("#edit-todo-submit");
+    editBtn.addEventListener("click", (evt) => {
+      evt.stopPropagation();
+      evt.preventDefault();
+
+      const todoForm = document.getElementById("todo");
+      const formActionInputs = document.querySelectorAll(".form-action input");
+
+      const inputArray = Array.from(formActionInputs).filter(
+        (input) => input.type !== "submit"
+      );
+
+      // update todo
+      projectController.updateTodo(
+        contentItem.getAttribute("data-id"),
+        ...inputArray.map((inputValue) => inputValue.value)
+      );
+
+      todoForm.reset();
+
+      const modal = document.querySelector(".modal");
+      // close modal
+      modal.classList.toggle("deactivated");
+    });
+
     // update important status
     const startIcon = contentItem.querySelectorAll(".fa-star");
     const startIconImportant = contentItem.querySelector(
@@ -155,16 +228,15 @@ export default (function todoListView() {
     modal.classList.toggle("deactivated");
 
     const modalBody = document.querySelector(".modal-body");
+    const todoForm = modalBody.querySelector(".todo");
+    const details = modalBody.querySelector(".details");
 
-    // remove all children
-    while (modalBody.firstChild) {
-      modalBody.removeChild(modalBody.firstChild);
-    }
+    // toggle form
+    todoForm.classList.add("deactivated");
+    // open details
+    details.classList.remove("deactivated");
 
-    const todoDetail = document.createElement("div");
-    todoDetail.setAttribute("id", "details");
-
-    todoDetail.innerHTML = `
+    details.innerHTML = `
       <div class="item-title">Title: ${todo.title}</div>
       <div class="item-date">Date: ${todo.date}</div>
       <div class="item-notes">Notes: ${todo.notes}</div>
@@ -174,10 +246,7 @@ export default (function todoListView() {
       <div class="item-completion">Status: ${
         todo.isCompleted ? "completed" : "not completed"
       }</div>
-
     `;
-
-    modalBody.appendChild(todoDetail);
   };
 
   return {
