@@ -26,6 +26,11 @@ export default (function projectController() {
     currentTodo.setIsCompleted(bool);
   };
 
+  const updateTodoImportant = (id, bool) => {
+    const currentTodo = project.todos.find((todo) => todo.id === id);
+    currentTodo.setIsImportant(bool);
+  };
+
   const removeAllToDos = () => {
     project.todos.splice(0, project.todos.length);
   };
@@ -36,5 +41,6 @@ export default (function projectController() {
     getAllTodos,
     removeAllToDos,
     updateTodoCompleted,
+    updateTodoImportant,
   };
 })();

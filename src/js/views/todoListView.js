@@ -63,8 +63,8 @@ export default (function todoListView() {
     <div class="item-date">${todo.date}</div>
     <div class="item-actions">
       <button class="btn btn-detail">details</button>
-      <i class="fa-regular fa-star icon__star"></i>
-      <i class="fa-solid fa-star icon__star-selected"></i>
+      <i class="fa-regular fa-star icon__star-not-important"></i>
+      <i class="fa-solid fa-star icon__star-important deactivated"></i>
       <i class="fa-regular fa-pen-to-square" id="icon-edit"></i>
       <i class="fa-solid fa-trash" id="icon-delete"></i>
     </div>
@@ -76,6 +76,47 @@ export default (function todoListView() {
   };
 
   const todoViewDomEvents = (contentItem, todo) => {
+    // update important status
+    const startIcon = contentItem.querySelectorAll(".fa-star");
+    const startIconImportant = contentItem.querySelector(
+      ".icon__star-important"
+    );
+    const startIconNotImportant = contentItem.querySelector(
+      ".icon__star-not-important"
+    );
+
+    startIcon.forEach((icon) => {
+      icon.addEventListener("click", (evt) => {
+        const iconClassList = evt.target.classList;
+
+        if (iconClassList.contains("icon__star-not-important")) {
+          // hide icon
+          startIconNotImportant.classList.toggle("deactivated");
+          // show icon
+          startIconImportant.classList.toggle("deactivated");
+
+          // *update status to important
+          projectController.updateTodoImportant(
+            contentItem.getAttribute("data-id"),
+            true
+          );
+        }
+
+        if (iconClassList.contains("icon__star-important")) {
+          // show icon
+          startIconNotImportant.classList.toggle("deactivated");
+          // hide icon
+          startIconImportant.classList.toggle("deactivated");
+
+          // *update status to not important
+          projectController.updateTodoImportant(
+            contentItem.getAttribute("data-id"),
+            false
+          );
+        }
+      });
+    });
+
     // update completion status
     const itemStatus = contentItem.querySelector(
       ".item-status input[type=checkbox]"

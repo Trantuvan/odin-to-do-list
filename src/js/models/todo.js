@@ -13,6 +13,10 @@ export default function toDo(options = {}) {
     isCompleted = bool;
   };
 
+  const setIsImportant = (bool) => {
+    isImportant = bool;
+  };
+
   // *Return getter make factory function reload new property if value change
   return {
     get id() {
@@ -34,5 +38,6 @@ export default function toDo(options = {}) {
       return isCompleted;
     },
     setIsCompleted,
+    setIsImportant,
   };
 }
