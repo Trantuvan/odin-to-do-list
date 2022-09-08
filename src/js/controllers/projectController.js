@@ -33,13 +33,15 @@ export default (function projectController() {
 
   const updateTodo = (id, ...args) => {
     const currentTodo = project.todos.find((todo) => todo.id === id);
-
-    console.log("before update", { currentTodo });
     currentTodo.setTitle(args[0]);
     currentTodo.setNotes(args[1]);
     currentTodo.setDate(args[2]);
-    console.log("after update", { currentTodo });
     todoListView.renderUpdate(id, currentTodo);
+  };
+
+  const removeTodo = (id) => {
+    const currentIndex = project.todos.findIndex((todo) => todo.id === id);
+    return project.todos.splice(currentIndex, 1);
   };
 
   const removeAllToDos = () => {
@@ -54,5 +56,6 @@ export default (function projectController() {
     updateTodoCompleted,
     updateTodoImportant,
     updateTodo,
+    removeTodo,
   };
 })();

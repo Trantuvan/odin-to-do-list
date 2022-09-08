@@ -97,6 +97,18 @@ export default (function todoListView() {
   };
 
   const todoViewDomEvents = (contentItem, todo) => {
+    // remove todo
+    const deleteBtn = contentItem.querySelector("#icon-delete");
+
+    deleteBtn.addEventListener("click", (evt) => {
+      evt.stopPropagation();
+
+      projectController.removeTodo(contentItem.getAttribute("data-id"));
+
+      const contentList = document.querySelector(".content__list");
+      contentList.removeChild(contentItem);
+    });
+
     // update todo
     const updateIcon = contentItem.querySelector("#icon-edit");
 
@@ -158,7 +170,6 @@ export default (function todoListView() {
       );
 
       const inputArrayValue = inputArray.map((input) => input.value);
-      console.log(...inputArrayValue);
 
       projectController.updateTodo(
         contentItem.getAttribute("data-id"),
