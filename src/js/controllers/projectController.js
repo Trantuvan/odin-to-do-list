@@ -34,11 +34,12 @@ export default (function projectController() {
   const updateTodo = (id, ...args) => {
     const currentTodo = project.todos.find((todo) => todo.id === id);
 
-    console.dir("before update", currentTodo);
+    console.log("before update", { currentTodo });
     currentTodo.setTitle(args[0]);
     currentTodo.setNotes(args[1]);
-    currentTodo.setDate(args[3]);
-    console.dir("after update", currentTodo);
+    currentTodo.setDate(args[2]);
+    console.log("after update", { currentTodo });
+    todoListView.renderUpdate(id, currentTodo);
   };
 
   const removeAllToDos = () => {

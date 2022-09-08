@@ -75,6 +75,27 @@ export default (function todoListView() {
     todoViewDomEvents(contentItem, todo);
   };
 
+  const renderUpdate = (id, todo) => {
+    const contentItem = document.querySelector(`[data-id="${id}"]`);
+
+    contentItem.innerHTML = `
+    <div class="item-status">
+      <input type="checkbox" name="isCompleted" value="false" />
+    </div>
+    <div class="item-title">${todo.title}</div>
+    <div class="item-date">${todo.date}</div>
+    <div class="item-actions">
+      <button class="btn btn-detail">details</button>
+      <i class="fa-regular fa-star icon__star-not-important"></i>
+      <i class="fa-solid fa-star icon__star-important deactivated"></i>
+      <i class="fa-regular fa-pen-to-square" id="icon-edit"></i>
+      <i class="fa-solid fa-trash" id="icon-delete"></i>
+    </div>
+    `;
+
+    todoViewDomEvents(contentItem, todo);
+  };
+
   const todoViewDomEvents = (contentItem, todo) => {
     // update todo
     const updateIcon = contentItem.querySelector("#icon-edit");
@@ -98,10 +119,10 @@ export default (function todoListView() {
 
       // submitBtn
       const submitBtn = document.querySelector("#add-todo-submit");
-      submitBtn.classList.toggle("deactivated");
+      submitBtn.classList.add("deactivated");
 
       const editBtn = document.querySelector("#edit-todo-submit");
-      editBtn.classList.toggle("deactivated");
+      editBtn.classList.remove("deactivated");
 
       const formActionInputs = document.querySelectorAll(".form-action input");
 
@@ -124,24 +145,39 @@ export default (function todoListView() {
     });
 
     // *update new fields
-    const editBtn = document.querySelector("#edit-todo-submit");
-    editBtn.addEventListener("click", (evt) => {
+    const editSubmitBtn = document.querySelector("#edit-todo-submit");
+    editSubmitBtn.addEventListener("click", (evt) => {
       evt.stopPropagation();
       evt.preventDefault();
 
-      const todoForm = document.getElementById("todo");
+      const todoForm = document.querySelector(".todo");
       const formActionInputs = document.querySelectorAll(".form-action input");
 
       const inputArray = Array.from(formActionInputs).filter(
         (input) => input.type !== "submit"
       );
 
-      // update todo
+      const inputArrayValue = inputArray.map((input) => input.value);
+      console.log(...inputArrayValue);
+
       projectController.updateTodo(
         contentItem.getAttribute("data-id"),
-        ...inputArray.map((inputValue) => inputValue.value)
+        ...inputArrayValue
       );
 
+      // reset completed state
+      projectController.updateTodoCompleted(
+        contentItem.getAttribute("data-id"),
+        false
+      );
+
+      // reset important state
+      projectController.updateTodoImportant(
+        contentItem.getAttribute("data-id"),
+        false
+      );
+
+      // reset form
       todoForm.reset();
 
       const modal = document.querySelector(".modal");
@@ -254,5 +290,6 @@ export default (function todoListView() {
     renderTodo,
     removeAllChildNodes,
     renderWhenNoProject,
+    renderUpdate,
   };
 })();

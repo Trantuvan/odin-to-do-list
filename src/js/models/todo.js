@@ -26,7 +26,7 @@ export default function toDo(options = {}) {
   };
 
   const setDate = (value) => {
-    date = value;
+    date = format(new Date(value), "yyyy-MM-dd");
   };
 
   // *Return getter make factory function reload new property if value change
