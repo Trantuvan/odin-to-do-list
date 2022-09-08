@@ -96,6 +96,7 @@ export default (function todoListView() {
     const deleteBtn = contentItem.querySelector("#icon-delete");
 
     deleteBtn.addEventListener("click", (evt) => {
+      evt.preventDefault();
       evt.stopPropagation();
 
       projectController.removeTodo(contentItem.getAttribute("data-id"));
@@ -165,6 +166,8 @@ export default (function todoListView() {
       );
 
       const inputArrayValue = inputArray.map((input) => input.value);
+
+      console.log(inputArrayValue);
 
       projectController.updateTodo(
         contentItem.getAttribute("data-id"),

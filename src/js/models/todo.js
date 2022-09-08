@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
 
 export default function toDo(options = {}) {
@@ -26,7 +26,8 @@ export default function toDo(options = {}) {
   };
 
   const setDate = (value) => {
-    date = format(new Date(value), "yyyy-MM-dd");
+    const result = parseISO(value);
+    date = format(result, "yyyy-MM-dd");
   };
 
   // *Return getter make factory function reload new property if value change

@@ -65,6 +65,13 @@ function main() {
 
     todoForm.classList.remove("deactivated");
     details.classList.add("deactivated");
+
+    // submitBtn
+    const submitBtn = document.querySelector("#add-todo-submit");
+    submitBtn.classList.remove("deactivated");
+
+    const editBtn = document.querySelector("#edit-todo-submit");
+    editBtn.classList.add("deactivated");
   });
 
   // click outside modal will close the modal
