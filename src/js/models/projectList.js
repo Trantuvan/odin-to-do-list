@@ -11,7 +11,7 @@ export default (function projectList() {
 
   const updateProject = (id, name) => {
     const currentProject = projects.find((project) => project.id === id);
-    currentProject.name = name;
+    currentProject.setName(name);
   };
 
   const removeProject = (id) => {

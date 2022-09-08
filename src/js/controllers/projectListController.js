@@ -16,6 +16,9 @@ export default (function projectListController() {
   const remove = (id) => {
     projectController.removeAllToDos();
     todoListView.removeAllChildNodes();
+    // setHeader name for todo
+    const headerName = document.querySelector(".header__name");
+    headerName.textContent = "no todo";
     projectList.removeProject(id);
   };
 
