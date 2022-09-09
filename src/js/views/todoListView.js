@@ -52,7 +52,7 @@ export default (function todoListView() {
 
     contentItem.innerHTML = `
     <div class="item-status">
-      <input type="checkbox" name="isCompleted" value="false" />
+      <input type="checkbox" name="isCompleted" value="false"/>
     </div>
     <div class="item-title">${todo.title}</div>
     <div class="item-date">${todo.date}</div>
@@ -64,8 +64,28 @@ export default (function todoListView() {
       <i class="fa-solid fa-trash" id="icon-delete"></i>
     </div>
     `;
+    console.log("renderTodo", todo);
 
     contentList.appendChild(contentItem);
+
+    // render state of the item
+    if (todo.isCompleted === true) {
+      contentItem.querySelector("input[type=checkbox]").checked = true;
+      contentItem.querySelector(".item-title").classList.add("completed");
+      contentItem.querySelector(".item-date").classList.add("completed");
+    } else {
+      contentItem.querySelector("input[type=checkbox]").checked = false;
+      contentItem.querySelector(".item-title").classList.remove("completed");
+      contentItem.querySelector(".item-date").classList.remove("completed");
+    }
+
+    if (todo.isImportant === true) {
+      contentItem.querySelector(".fa-regular").classList.add("deactivated");
+      contentItem.querySelector(".fa-solid").classList.remove("deactivated");
+    } else {
+      contentItem.querySelector(".fa-regular").classList.remove("deactivated");
+      contentItem.querySelector(".fa-solid").classList.add("deactivated");
+    }
 
     todoViewDomEvents(contentItem, todo);
   };
@@ -73,22 +93,27 @@ export default (function todoListView() {
   const renderUpdate = (id, todo) => {
     const contentItem = document.querySelector(`[data-id="${id}"]`);
 
-    contentItem.innerHTML = `
-    <div class="item-status">
-      <input type="checkbox" name="isCompleted" value="false" />
-    </div>
-    <div class="item-title">${todo.title}</div>
-    <div class="item-date">${todo.date}</div>
-    <div class="item-actions">
-      <button class="btn btn-detail">details</button>
-      <i class="fa-regular fa-star icon__star-not-important"></i>
-      <i class="fa-solid fa-star icon__star-important deactivated"></i>
-      <i class="fa-regular fa-pen-to-square" id="icon-edit"></i>
-      <i class="fa-solid fa-trash" id="icon-delete"></i>
-    </div>
-    `;
+    contentItem.querySelector(".item-title").textContent = todo.title;
+    contentItem.querySelector(".item-date").textContent = todo.date;
 
-    todoViewDomEvents(contentItem, todo);
+    // render state of the item
+    if (todo.isCompleted === true) {
+      contentItem.querySelector("input[type=checkbox]").checked = true;
+      contentItem.querySelector(".item-title").classList.add("completed");
+      contentItem.querySelector(".item-date").classList.add("completed");
+    } else {
+      contentItem.querySelector("input[type=checkbox]").checked = false;
+      contentItem.querySelector(".item-title").classList.remove("completed");
+      contentItem.querySelector(".item-date").classList.remove("completed");
+    }
+
+    if (todo.isImportant === true) {
+      contentItem.querySelector(".fa-regular").classList.add("deactivated");
+      contentItem.querySelector(".fa-solid").classList.remove("deactivated");
+    } else {
+      contentItem.querySelector(".fa-regular").classList.remove("deactivated");
+      contentItem.querySelector(".fa-solid").classList.add("deactivated");
+    }
   };
 
   const todoViewDomEvents = (contentItem, todo) => {
@@ -174,17 +199,17 @@ export default (function todoListView() {
         ...inputArrayValue
       );
 
-      // reset completed state
-      projectController.updateTodoCompleted(
-        contentItem.getAttribute("data-id"),
-        false
-      );
+      // // reset completed state
+      // projectController.updateTodoCompleted(
+      //   contentItem.getAttribute("data-id"),
+      //   false
+      // );
 
-      // reset important state
-      projectController.updateTodoImportant(
-        contentItem.getAttribute("data-id"),
-        false
-      );
+      // // reset important state
+      // projectController.updateTodoImportant(
+      //   contentItem.getAttribute("data-id"),
+      //   false
+      // );
 
       // reset form
       todoForm.reset();
