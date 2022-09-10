@@ -199,18 +199,6 @@ export default (function todoListView() {
         ...inputArrayValue
       );
 
-      // // reset completed state
-      // projectController.updateTodoCompleted(
-      //   contentItem.getAttribute("data-id"),
-      //   false
-      // );
-
-      // // reset important state
-      // projectController.updateTodoImportant(
-      //   contentItem.getAttribute("data-id"),
-      //   false
-      // );
-
       // reset form
       todoForm.reset();
 
@@ -261,9 +249,7 @@ export default (function todoListView() {
     });
 
     // update completion status
-    const itemStatus = contentItem.querySelector(
-      ".item-status input[type=checkbox]"
-    );
+    const itemStatus = contentItem.querySelector("input[type=checkbox]");
 
     itemStatus.addEventListener("click", (evt) => {
       evt.stopPropagation();
