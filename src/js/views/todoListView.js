@@ -245,15 +245,15 @@ export default (function todoListView() {
       evt.stopPropagation();
 
       if (itemStatus.checked === true) {
-        document.querySelector(".item-title").classList.add("completed");
-        document.querySelector(".item-date").classList.add("completed");
+        contentItem.querySelector(".item-title").classList.add("completed");
+        contentItem.querySelector(".item-date").classList.add("completed");
         projectController.updateTodoCompleted(
           contentItem.getAttribute("data-id"),
           itemStatus.checked
         );
       } else {
-        document.querySelector(".item-title").classList.remove("completed");
-        document.querySelector(".item-date").classList.remove("completed");
+        contentItem.querySelector(".item-title").classList.remove("completed");
+        contentItem.querySelector(".item-date").classList.remove("completed");
         projectController.updateTodoCompleted(
           contentItem.getAttribute("data-id"),
           itemStatus.checked
