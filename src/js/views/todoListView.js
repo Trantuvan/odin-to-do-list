@@ -1,4 +1,5 @@
 import projectController from "../controllers/projectController";
+import formView from "../views/formView";
 
 export default (function todoListView() {
   const removeAllChildNodes = () => {
@@ -142,20 +143,8 @@ export default (function todoListView() {
       // open modal
       modal.classList.toggle("deactivated");
 
-      // open form
-      const modalBody = document.querySelector(".modal-body");
-      const todoForm = modalBody.querySelector(".todo");
-      const details = modalBody.querySelector(".details");
-
-      todoForm.classList.remove("deactivated");
-      details.classList.add("deactivated");
-
-      // submitBtn
-      const submitBtn = document.querySelector("#add-todo-submit");
-      submitBtn.classList.add("deactivated");
-
-      const editBtn = document.querySelector("#edit-todo-submit");
-      editBtn.classList.remove("deactivated");
+      // render edit form
+      formView.renderEditTodo();
 
       const formActionInputs = document.querySelectorAll(".form-action input");
 
@@ -175,36 +164,37 @@ export default (function todoListView() {
           input.value = todo.date;
         }
       });
-    });
 
-    // *update new fields
-    const editSubmitBtn = document.querySelector("#edit-todo-submit");
-    editSubmitBtn.addEventListener("click", (evt) => {
-      evt.stopPropagation();
-      evt.preventDefault();
+      const editSubmitBtn = document.querySelector("#edit-todo-submit");
+      // *update new fields
+      editSubmitBtn.addEventListener("click", (evt) => {
+        evt.stopPropagation();
+        evt.preventDefault();
 
-      const todoForm = document.querySelector(".todo");
-      const formActionInputs = document.querySelectorAll(".form-action input");
+        const todoForm = document.querySelector(".todo");
+        const formActionInputs =
+          document.querySelectorAll(".form-action input");
 
-      const inputArray = Array.from(formActionInputs).filter(
-        (input) => input.type !== "submit"
-      );
+        const inputArray = Array.from(formActionInputs).filter(
+          (input) => input.type !== "submit"
+        );
 
-      const inputArrayValue = inputArray.map((input) => input.value);
+        const inputArrayValue = inputArray.map((input) => input.value);
 
-      console.log(inputArrayValue);
+        console.log(inputArrayValue);
 
-      projectController.updateTodo(
-        contentItem.getAttribute("data-id"),
-        ...inputArrayValue
-      );
+        projectController.updateTodo(
+          contentItem.getAttribute("data-id"),
+          ...inputArrayValue
+        );
 
-      // reset form
-      todoForm.reset();
+        // reset form
+        todoForm.reset();
 
-      const modal = document.querySelector(".modal");
-      // close modal
-      modal.classList.toggle("deactivated");
+        const modal = document.querySelector(".modal");
+        // close modal
+        modal.classList.toggle("deactivated");
+      });
     });
 
     // update important status
@@ -283,26 +273,19 @@ export default (function todoListView() {
     const modal = document.querySelector(".modal");
     modal.classList.toggle("deactivated");
 
-    const modalBody = document.querySelector(".modal-body");
-    const todoForm = modalBody.querySelector(".todo");
-    const details = modalBody.querySelector(".details");
+    formView.renderDetails();
 
-    // toggle form
-    todoForm.classList.add("deactivated");
-    // open details
-    details.classList.remove("deactivated");
+    const details = document.querySelector(".details");
 
-    details.innerHTML = `
-      <div class="item-title">Title: ${todo.title}</div>
-      <div class="item-date">Date: ${todo.date}</div>
-      <div class="item-notes">Notes: ${todo.notes}</div>
-      <div class="item-importance">Priority: ${
-        todo.isImportant ? "important" : "not important"
-      }</div>
-      <div class="item-completion">Status: ${
-        todo.isCompleted ? "completed" : "not completed"
-      }</div>
-    `;
+    details.querySelector(".item-title").textContent = `Title: ${todo.title}`;
+    details.querySelector(".item-date").textContent = `Date: ${todo.date}`;
+    details.querySelector(".item-notes").textContent = `Notes: ${todo.notes}`;
+    details.querySelector(".item-important").textContent = `Priority: ${
+      todo.isImportant ? "important" : "not important"
+    }`;
+    details.querySelector(".item-completed").textContent = `Status: ${
+      todo.isCompleted ? "completed" : "not completed"
+    }`;
   };
 
   return {

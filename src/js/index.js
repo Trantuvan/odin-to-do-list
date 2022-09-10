@@ -8,6 +8,7 @@ import project from "./models/project";
 import projectListController from "./controllers/projectListController";
 import projectController from "./controllers/projectController";
 import todo from "./models/todo";
+import formView from "./views/formView";
 
 (() => {
   // changeFavicon
@@ -54,24 +55,42 @@ function main() {
   const modalContainer = document.querySelector(".modal-container");
   const addTaskbtn = document.querySelector("#add-task");
   const modalClosebtn = document.querySelector(".modal-header img");
-  const modalSubmitButton = document.querySelector("#add-todo-submit");
 
   addTaskbtn.addEventListener("click", () => {
     modal.classList.toggle("deactivated");
 
-    const modalBody = document.querySelector(".modal-body");
-    const todoForm = modalBody.querySelector(".todo");
-    const details = modalBody.querySelector(".details");
+    // render todoForm
+    formView.renderCreateTodo();
+    const modalSubmitButton = document.querySelector("#add-todo-submit");
 
-    todoForm.classList.remove("deactivated");
-    details.classList.add("deactivated");
+    // list to create new todo
+    modalSubmitButton.addEventListener("click", (evt) => {
+      // prevent default prevent page to reload
+      evt.preventDefault();
+      evt.stopPropagation();
 
-    // submitBtn
-    const submitBtn = document.querySelector("#add-todo-submit");
-    submitBtn.classList.remove("deactivated");
+      const todoForm = document.querySelector(".todo");
+      const formActionInputs = document.querySelectorAll(".form-action input");
 
-    const editBtn = document.querySelector("#edit-todo-submit");
-    editBtn.classList.add("deactivated");
+      const inputArray = Array.from(formActionInputs).filter(
+        (input) => input.type !== "submit"
+      );
+
+      // create new todo
+      const newTodo = todo({
+        title: inputArray[0].value,
+        notes: inputArray[1].value,
+        date: inputArray[2].value,
+      });
+
+      // add todo to project
+      projectController.addTodo(newTodo);
+
+      todoForm.reset();
+
+      // close modal
+      modal.classList.toggle("deactivated");
+    });
   });
 
   // click outside modal will close the modal
@@ -87,34 +106,5 @@ function main() {
   // prevent modal close when click in form
   modalContainer.addEventListener("click", (evt) => {
     evt.stopPropagation();
-  });
-
-  // create new todo
-  modalSubmitButton.addEventListener("click", (evt) => {
-    // prevent default prevent page to reload
-    evt.preventDefault();
-    evt.stopPropagation();
-
-    const todoForm = document.querySelector(".todo");
-    const formActionInputs = document.querySelectorAll(".form-action input");
-
-    const inputArray = Array.from(formActionInputs).filter(
-      (input) => input.type !== "submit"
-    );
-
-    // create new todo
-    const newTodo = todo({
-      title: inputArray[0].value,
-      notes: inputArray[1].value,
-      date: inputArray[2].value,
-    });
-
-    // add todo to project
-    projectController.addTodo(newTodo);
-
-    todoForm.reset();
-
-    // close modal
-    modal.classList.toggle("deactivated");
   });
 }
