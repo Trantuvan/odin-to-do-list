@@ -5,6 +5,7 @@ export default (function projectList() {
   let projects = [];
 
   const setProjectsFromLocalStorage = (value) => {
+    // JSON only read string values, function will not be return when json parse
     const newProjectList = value.map((elem) => {
       return populateProjects(elem);
     });
