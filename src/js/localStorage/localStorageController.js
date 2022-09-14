@@ -43,6 +43,12 @@ export default (function localStorageController() {
     localStorage.setItem("projectArray", JSON.stringify(projectArray));
   };
 
+  const updateProjectName = (id, name) => {
+    const currentProject = projectArray.find((project) => project.id === id);
+    currentProject.setName(name);
+    localStorage.setItem("projectArray", JSON.stringify(projectArray));
+  };
+
   return {
     get projectArray() {
       return projectArray;
@@ -50,5 +56,6 @@ export default (function localStorageController() {
     storageAvailable,
     initProjectArray,
     addProject,
+    updateProjectName,
   };
 })();

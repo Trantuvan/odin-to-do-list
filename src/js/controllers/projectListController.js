@@ -13,6 +13,7 @@ export default (function projectListController() {
 
   const update = (id, name) => {
     projectList.updateProject(id, name);
+    localStorageController.updateProjectName(id, name);
   };
 
   const remove = (id) => {
