@@ -32,6 +32,7 @@ export default (function projectController() {
   const updateTodoImportant = (id, bool) => {
     const currentTodo = project.todos.find((todo) => todo.id === id);
     currentTodo.setIsImportant(bool);
+    localStorageController.updateImportant(id, bool, project);
   };
 
   const updateTodo = (id, ...args) => {
@@ -39,6 +40,7 @@ export default (function projectController() {
     currentTodo.setTitle(args[0]);
     currentTodo.setNotes(args[1]);
     currentTodo.setDate(args[2]);
+    localStorageController.updateTodo(id, project, args);
     todoListView.renderUpdate(id, currentTodo);
   };
 
