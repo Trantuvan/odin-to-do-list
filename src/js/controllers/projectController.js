@@ -16,8 +16,8 @@ export default (function projectController() {
   const addTodo = (newTodo) => {
     try {
       project.todos.push(newTodo);
+      localStorageController.addTodo(newTodo);
       todoListView.renderTodo(newTodo);
-      // localStorageController.addTodo(newTodo);
     } catch (e) {
       todoListView.renderWhenNoProject();
     }
@@ -43,7 +43,8 @@ export default (function projectController() {
 
   const removeTodo = (id) => {
     const currentIndex = project.todos.findIndex((todo) => todo.id === id);
-    return project.todos.splice(currentIndex, 1);
+    project.todos.splice(currentIndex, 1);
+    localStorageController.removeTodo(id, project);
   };
 
   const removeAllToDos = () => {

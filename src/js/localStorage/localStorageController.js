@@ -70,6 +70,22 @@ export default (function localStorageController() {
     localStorage.setItem("projectArray", JSON.stringify(projectArray));
   };
 
+  const removeTodo = (id, currProject) => {
+    projectArray = JSON.parse(localStorage.getItem("projectArray"));
+
+    const localStorageProject = projectArray.find(
+      (project) => project.id === currProject.id
+    );
+
+    const currentIndex = localStorageProject.todos.findIndex(
+      (todo) => todo.id === id
+    );
+
+    localStorageProject.todos.splice(currentIndex, 1);
+
+    localStorage.setItem("projectArray", JSON.stringify(projectArray));
+  };
+
   const setCurrentProject = (value) => {
     currentProject = value;
   };
@@ -85,5 +101,6 @@ export default (function localStorageController() {
     removeProject,
     addTodo,
     setCurrentProject,
+    removeTodo,
   };
 })();
