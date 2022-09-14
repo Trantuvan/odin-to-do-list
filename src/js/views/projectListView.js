@@ -53,6 +53,7 @@ export default (function projectListView() {
       const headerName = document.querySelector(".header__name");
       headerName.textContent = currentProject.name;
       projectController.setProject(currentProject);
+      // localStorageController.setProjectForLocalStorage(currentProject);
 
       // render all todos already have
       projectController.getAllTodos();

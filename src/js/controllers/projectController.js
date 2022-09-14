@@ -1,3 +1,4 @@
+import localStorageController from "../localStorage/localStorageController";
 import todoListView from "../views/todoListView";
 
 export default (function projectController() {
@@ -16,6 +17,7 @@ export default (function projectController() {
     try {
       project.todos.push(newTodo);
       todoListView.renderTodo(newTodo);
+      // localStorageController.addTodo(newTodo);
     } catch (e) {
       todoListView.renderWhenNoProject();
     }

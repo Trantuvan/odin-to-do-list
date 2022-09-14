@@ -1,8 +1,6 @@
 export default (function localStorageController() {
   let projectArray = JSON.parse(localStorage.getItem("projectArray"));
-
-  // console.log("string: ", localStorage.getItem("projectArray"));
-  // console.log(`array: ${projectArray.constructor === Array}`, projectArray);
+  let project = {};
 
   const storageAvailable = (type) => {
     let storage;
@@ -55,6 +53,15 @@ export default (function localStorageController() {
     localStorage.setItem("projectArray", JSON.stringify(projectArray));
   };
 
+  const setProjectForLocalStorage = (value) => {
+    project = value;
+  };
+
+  const addTodo = (todo) => {
+    project.todos.push(todo);
+    localStorage.setItem("projectArray", JSON.stringify(projectArray));
+  };
+
   return {
     get projectArray() {
       return projectArray;
@@ -64,5 +71,7 @@ export default (function localStorageController() {
     addProject,
     updateProjectName,
     removeProject,
+    setProjectForLocalStorage,
+    addTodo,
   };
 })();
