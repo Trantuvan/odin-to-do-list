@@ -105,6 +105,7 @@ function main() {
 
       // add todo to project
       projectController.addTodo(newTodo);
+      localStorageController.addTodo(newTodo);
 
       todoForm.reset();
 

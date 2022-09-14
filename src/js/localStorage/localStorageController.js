@@ -1,6 +1,6 @@
 export default (function localStorageController() {
   let projectArray = JSON.parse(localStorage.getItem("projectArray"));
-  let project = {};
+  let currentProject = {};
 
   const storageAvailable = (type) => {
     let storage;
@@ -36,30 +36,42 @@ export default (function localStorageController() {
   };
 
   const addProject = (project) => {
+    projectArray = JSON.parse(localStorage.getItem("projectArray"));
+
     projectArray.push(project);
     // *override old key "projectArray" with new array of project objects
     localStorage.setItem("projectArray", JSON.stringify(projectArray));
   };
 
   const updateProjectName = (id, name) => {
+    projectArray = JSON.parse(localStorage.getItem("projectArray"));
+
     const currentProject = projectArray.find((project) => project.id === id);
-    currentProject.setName(name);
+    console.log(currentProject);
+    currentProject.name = name;
     localStorage.setItem("projectArray", JSON.stringify(projectArray));
   };
 
   const removeProject = (id) => {
+    projectArray = JSON.parse(localStorage.getItem("projectArray"));
+
     const currentIndex = projectArray.find((project) => project.id === id);
     projectArray.splice(currentIndex, 1);
     localStorage.setItem("projectArray", JSON.stringify(projectArray));
   };
 
-  const setProjectForLocalStorage = (value) => {
-    project = value;
+  const addTodo = (todo) => {
+    projectArray = JSON.parse(localStorage.getItem("projectArray"));
+
+    projectArray
+      .find((project) => project.id === currentProject.id)
+      .todos.push(todo);
+
+    localStorage.setItem("projectArray", JSON.stringify(projectArray));
   };
 
-  const addTodo = (todo) => {
-    project.todos.push(todo);
-    localStorage.setItem("projectArray", JSON.stringify(projectArray));
+  const setCurrentProject = (value) => {
+    currentProject = value;
   };
 
   return {
@@ -71,7 +83,7 @@ export default (function localStorageController() {
     addProject,
     updateProjectName,
     removeProject,
-    setProjectForLocalStorage,
     addTodo,
+    setCurrentProject,
   };
 })();
