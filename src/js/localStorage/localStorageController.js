@@ -47,7 +47,7 @@ export default (function localStorageController() {
     projectArray = JSON.parse(localStorage.getItem("projectArray"));
 
     const currentProject = projectArray.find((project) => project.id === id);
-    console.log(currentProject);
+
     currentProject.name = name;
     localStorage.setItem("projectArray", JSON.stringify(projectArray));
   };
