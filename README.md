@@ -1,2 +1,3 @@
 # odin-to-do-list
-odin-to-do-list
+Implement Single resonsibity principle in Solid
+LocalStorage
