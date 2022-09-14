@@ -49,6 +49,12 @@ export default (function localStorageController() {
     localStorage.setItem("projectArray", JSON.stringify(projectArray));
   };
 
+  const removeProject = (id) => {
+    const currentIndex = projectArray.find((project) => project.id === id);
+    projectArray.splice(currentIndex, 1);
+    localStorage.setItem("projectArray", JSON.stringify(projectArray));
+  };
+
   return {
     get projectArray() {
       return projectArray;
@@ -57,5 +63,6 @@ export default (function localStorageController() {
     initProjectArray,
     addProject,
     updateProjectName,
+    removeProject,
   };
 })();

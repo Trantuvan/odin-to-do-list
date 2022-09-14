@@ -23,6 +23,7 @@ export default (function projectListController() {
     const headerName = document.querySelector(".header__name");
     headerName.textContent = "no todo";
     projectList.removeProject(id);
+    localStorageController.removeProject(id);
   };
 
   const get = (id) => {
