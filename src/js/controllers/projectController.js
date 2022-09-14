@@ -26,6 +26,7 @@ export default (function projectController() {
   const updateTodoCompleted = (id, bool) => {
     const currentTodo = project.todos.find((todo) => todo.id === id);
     currentTodo.setIsCompleted(bool);
+    localStorageController.updateComplete(id, bool, project);
   };
 
   const updateTodoImportant = (id, bool) => {

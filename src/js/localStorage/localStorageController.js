@@ -70,6 +70,18 @@ export default (function localStorageController() {
     localStorage.setItem("projectArray", JSON.stringify(projectArray));
   };
 
+  const updateComplete = (id, bool, currProject) => {
+    projectArray = JSON.parse(localStorage.getItem("projectArray"));
+
+    const localStorageProject = projectArray.find(
+      (project) => project.id === currProject.id
+    );
+
+    localStorageProject.todos.find((todo) => todo.id === id).isCompleted = bool;
+
+    localStorage.setItem("projectArray", JSON.stringify(projectArray));
+  };
+
   const removeTodo = (id, currProject) => {
     projectArray = JSON.parse(localStorage.getItem("projectArray"));
 
@@ -102,5 +114,6 @@ export default (function localStorageController() {
     addTodo,
     setCurrentProject,
     removeTodo,
+    updateComplete,
   };
 })();
