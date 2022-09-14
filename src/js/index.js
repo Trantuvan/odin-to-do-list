@@ -5,19 +5,39 @@ import changeFavicon from "./utils/changeFavicon";
 import toggleLightMode from "./localStorage/lightMode";
 import isEmptyOrSpaces from "./utils/isEmptyOrSpaces";
 import project from "./models/project";
+import localStorageController from "./localStorage/localStorageController";
 import projectListController from "./controllers/projectListController";
 import projectController from "./controllers/projectController";
 import todo from "./models/todo";
 import formView from "./views/formView";
+import projectListView from "./views/projectListView";
 
 (() => {
   // changeFavicon
   changeFavicon(Logo);
-  // set lightMode
-  toggleLightMode();
 
-  // app startup
-  main();
+  // check localStorage availability for browser
+  const localStorageAvailable =
+    localStorageController.storageAvailable("localStorage");
+
+  if (localStorageAvailable === true) {
+    // set lightMode
+    toggleLightMode();
+
+    // initProjectArray in localStorage
+    localStorageController.initProjectArray();
+
+    // set projectArray from localStorage
+    projectListController.setProjectListFromLocalStorage();
+    // renderAllProjects when app load from localStorage
+    projectListView.renderAllProjects();
+
+    // app startup
+    main();
+  } else {
+    // log error in console
+    console.log(localStorageAvailable);
+  }
 })();
 
 function main() {

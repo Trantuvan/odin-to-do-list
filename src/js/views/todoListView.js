@@ -65,7 +65,6 @@ export default (function todoListView() {
       <i class="fa-solid fa-trash" id="icon-delete"></i>
     </div>
     `;
-    console.log("renderTodo", todo);
 
     contentList.appendChild(contentItem);
 
@@ -180,8 +179,6 @@ export default (function todoListView() {
         );
 
         const inputArrayValue = inputArray.map((input) => input.value);
-
-        console.log(inputArrayValue);
 
         projectController.updateTodo(
           contentItem.getAttribute("data-id"),

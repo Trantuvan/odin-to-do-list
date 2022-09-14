@@ -1,5 +1,9 @@
 export default (function projectList() {
-  const projects = [];
+  let projects = [];
+
+  const setProjectsFromLocalStorage = (value) => {
+    projects = value;
+  };
 
   const addProject = (project) => {
     projects.push(project);
@@ -19,5 +23,14 @@ export default (function projectList() {
     return projects.splice(currentIndex, 1);
   };
 
-  return { addProject, updateProject, removeProject, getProject };
+  return {
+    get projects() {
+      return projects;
+    },
+    addProject,
+    updateProject,
+    removeProject,
+    getProject,
+    setProjectsFromLocalStorage,
+  };
 })();

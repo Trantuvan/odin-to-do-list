@@ -1,8 +1,17 @@
 import projectListController from "../controllers/projectListController";
 import isEmptyOrSpaces from "../utils/isEmptyOrSpaces";
 import projectController from "../controllers/projectController";
+import localStorageController from "../localStorage/localStorageController";
 
 export default (function projectListView() {
+  const renderAllProjects = () => {
+    const projectsFromLocalStorage = localStorageController.projectArray;
+
+    if (projectsFromLocalStorage.length > 0) {
+      projectsFromLocalStorage.forEach((project) => render(project));
+    }
+  };
+
   const render = (project) => {
     const navList = document.querySelector(".nav__list");
     const navItem = document.createElement("li");
@@ -128,5 +137,5 @@ export default (function projectListView() {
     });
   };
 
-  return { render };
+  return { render, renderAllProjects };
 })();

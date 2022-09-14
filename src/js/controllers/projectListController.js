@@ -2,11 +2,13 @@ import projectList from "../models/projectList";
 import projectListView from "../views/projectListView";
 import todoListView from "../views/todoListView";
 import projectController from "./projectController";
+import localStorageController from "../localStorage/localStorageController";
 
 export default (function projectListController() {
   const add = (newProject) => {
     projectList.addProject(newProject);
     projectListView.render(newProject);
+    localStorageController.addProject(newProject);
   };
 
   const update = (id, name) => {
@@ -26,5 +28,13 @@ export default (function projectListController() {
     return projectList.getProject(id);
   };
 
-  return { add, update, remove, get };
+  const setProjectListFromLocalStorage = () => {
+    const projectArray = localStorageController.projectArray;
+
+    if (projectArray.length > 0) {
+      projectList.setProjectsFromLocalStorage(projectArray);
+    }
+  };
+
+  return { add, update, remove, get, setProjectListFromLocalStorage };
 })();

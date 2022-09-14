@@ -24,7 +24,6 @@ export default (function projectController() {
   const updateTodoCompleted = (id, bool) => {
     const currentTodo = project.todos.find((todo) => todo.id === id);
     currentTodo.setIsCompleted(bool);
-    console.log("isCompleted update", currentTodo);
   };
 
   const updateTodoImportant = (id, bool) => {
