@@ -1,8 +1,48 @@
+import project from "./project";
+import todo from "./todo";
+
 export default (function projectList() {
   let projects = [];
 
   const setProjectsFromLocalStorage = (value) => {
-    projects = value;
+    const newProjectList = value.map((elem) => {
+      return populateProjects(elem);
+    });
+    projects = newProjectList;
+  };
+
+  const populateProjects = (elem) => {
+    if (elem.todos.length < 0) {
+      return Object.assign({}, project(""), { id: elem.id, name: elem.name });
+    } else {
+      const todos = elem.todos.map((elem) => populateTodo(elem));
+
+      return Object.assign({}, project(""), {
+        id: elem.id,
+        name: elem.name,
+        todos: todos,
+      });
+    }
+  };
+
+  const populateTodo = (elem) => {
+    const todos = Object.assign(
+      {},
+      todo({
+        title: "",
+        notes: "",
+        date: "",
+      }),
+      {
+        id: elem.id,
+        title: elem.title,
+        notes: elem.notes,
+        isCompleted: elem.isCompleted,
+        isImportant: elem.isImportant,
+        date: elem.date,
+      }
+    );
+    return todos;
   };
 
   const addProject = (project) => {
