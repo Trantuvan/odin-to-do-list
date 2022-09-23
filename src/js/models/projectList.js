@@ -7,12 +7,12 @@ export default (function projectList() {
   const setProjectsFromLocalStorage = (value) => {
     // JSON only read string values, function will not be return when json parse
     const newProjectList = value.map((elem) => {
-      return populateProjects(elem);
+      return populateProjects_old(elem);
     });
     projects = newProjectList;
   };
 
-  const populateProjects = (elem) => {
+  const populateProjects_old = (elem) => {
     if (elem.todos.length < 0) {
       return Object.assign({}, project(""), { id: elem.id, name: elem.name });
     } else {
@@ -24,6 +24,18 @@ export default (function projectList() {
         todos: todos,
       });
     }
+  };
+
+  const populateProjects = (elem) => {
+    const rebuiltProject = project(elem.name);
+    
+    /*
+    TODO
+    [ ] rebuild todos
+    [ ] assign the rebuilt todos to the rebuilt project (using the new setter)
+    */
+    
+    return Object.assign(rebuiltProject, elem);
   };
 
   const populateTodo = (elem) => {
