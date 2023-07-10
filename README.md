@@ -1,4 +1,4 @@
-# odin-shopping-cart
+# odin-todo-list
 
 ## What is this about?
 
